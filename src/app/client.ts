@@ -52,7 +52,6 @@ export const editUser = async (id: string, userData: any) => {
 export const deleteUser = async (id: string) => {
   try {
     const url = `${process.env.NEXT_PUBLIC_API_URL}/users/${id}`;
-    console.log("url>>>", url);
     const res = await fetch(url, {
       method: "DELETE",
       headers: {
