@@ -3,15 +3,16 @@ import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
+import Cookies from 'js-cookie'
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
-
 import { loginDefaultValues, loginFormSchema } from "@/utils/formSchema";
-
 import FormItems from "@/custom_components/Form/FormItems";
 import { useRouter } from "next/navigation";
 import { loginUser } from "../client";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Link from "next/link";
 
 const Login = () => {
   const router = useRouter();
@@ -24,12 +25,14 @@ const Login = () => {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof loginFormSchema>) {
     const res = await loginUser(values);
-    console.log("res>>>", res.user.role);
+    toast("User logged In Successfully!");
+
     if (res.user.role !== "admin") {
       router.push(`/users/${res.user._id}`);
     } else {
       router.push("/users");
     }
+    Cookies.set('role', res.user.role)
     form.reset(loginDefaultValues);
   }
   return (
@@ -65,15 +68,19 @@ const Login = () => {
                     label="Password"
                     placeholder="••••••••"
                     field={field}
+                    type="password"
                   />
                 )}
               />
             </div>
           </div>
-
-          <Button type="submit">Submit</Button>
+          <div className="flex justify-between items-center" >
+            <Button type="submit">Submit</Button>
+            <Link href="/signup"> Signup Now </Link>
+          </div>
         </form>
       </Form>
+      <ToastContainer />
     </div>
   );
 };

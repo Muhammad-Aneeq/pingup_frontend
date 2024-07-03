@@ -10,6 +10,7 @@ import {
 import Link from "next/link";
 import { MdEdit } from "react-icons/md";
 import DeleteComp from "./DeleteComp";
+import { ToastContainer, toast } from 'react-toastify';
 
 export function UserTable({ data }: any) {
   return (
@@ -52,6 +53,7 @@ export function UserTable({ data }: any) {
           ))}
         </TableBody>
       </Table>
+      <ToastContainer />
     </div>
   );
 }

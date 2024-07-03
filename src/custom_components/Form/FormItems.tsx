@@ -7,12 +7,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-const FormItems = ({ label, placeholder, field, isDisabled = false }: any) => {
+const FormItems = ({ label, placeholder, field, isDisabled = false, type }: any) => {
   return (
     <FormItem>
       <FormLabel>{label}</FormLabel>
       <FormControl>
-        <Input disabled={isDisabled} placeholder={placeholder} {...field} />
+        <Input type={type || "text"} disabled={isDisabled} placeholder={placeholder} {...field} />
       </FormControl>
       <FormMessage />
     </FormItem>

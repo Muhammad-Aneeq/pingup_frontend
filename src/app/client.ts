@@ -6,6 +6,7 @@ export const registerUser = async (userData: any) => {
       headers: {
         "Content-Type": "application/json",
       },
+      cache:"no-store",
       body: JSON.stringify(userData),
     });
     const data = res.json();
@@ -23,6 +24,7 @@ export const loginUser = async (userData: any) => {
       headers: {
         "Content-Type": "application/json",
       },
+      cache:"no-store",
       body: JSON.stringify(userData),
     });
     const data = res.json();
@@ -37,6 +39,7 @@ export const editUser = async (id: string, userData: any) => {
     const url = `${process.env.NEXT_PUBLIC_API_URL}/users/${id}`;
     const res = await fetch(url, {
       method: "PATCH",
+      cache:"no-store",
       headers: {
         "Content-Type": "application/json",
       },
@@ -54,12 +57,15 @@ export const deleteUser = async (id: string) => {
     const url = `${process.env.NEXT_PUBLIC_API_URL}/users/${id}`;
     const res = await fetch(url, {
       method: "DELETE",
+      cache:"no-store",
       headers: {
         "Content-Type": "application/json",
       },
     });
-    const data = res.json();
-    return data;
+       if(res.ok){
+        return {"message": "user deleted Successfully!"}
+       }
+
   } catch (error) {
     console.log("error>>>>", error);
   }

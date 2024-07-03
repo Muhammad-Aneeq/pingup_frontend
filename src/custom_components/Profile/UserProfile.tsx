@@ -6,6 +6,8 @@ import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import {
   defaultValues,
@@ -17,6 +19,7 @@ import FormItems from "@/custom_components/Form/FormItems";
 import Image from "next/image";
 import { editUser } from "@/app/client";
 import { useRouter } from "next/navigation";
+import Cookies from 'js-cookie'
 import Link from "next/link";
 
 const UserProfile = ({ data }: any) => {
@@ -32,10 +35,21 @@ const UserProfile = ({ data }: any) => {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof editFormSchema>) {
     const res = await editUser(data._id, values);
-    form.reset(editDefaultValues);
-    setIsEdit(false)
-    window.location.reload()
-    router.refresh();
+    const role = Cookies.get('role')
+    if (res) {
+      form.reset(res);
+      setIsEdit(false)
+      toast("User Editted Successfully!");
+      setTimeout(() => {
+        if (role === "admin") {
+          router.push("/users")
+          router.refresh()
+        } else {
+          router.refresh();
+        }
+      }, 2000)
+    }
+
   }
 
   useEffect(() => {
@@ -170,11 +184,12 @@ const UserProfile = ({ data }: any) => {
             </div>
           </div>
           <div className="flex justify-between">
-            <Button onClick={() => setIsEdit(true)}>Edit</Button>
+            <Button type="button" onClick={() => setIsEdit(true)}>Edit</Button>
             {isEdit && <Button type="submit">Save</Button>}
           </div>
         </form>
       </Form>
+      <ToastContainer />
     </div>
   );
 };

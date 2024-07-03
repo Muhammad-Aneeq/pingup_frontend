@@ -3,16 +3,15 @@ import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
+import { ToastContainer, toast } from 'react-toastify';
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
-
 import { defaultValues, formSchema } from "@/utils/formSchema";
-
 import FormItems from "@/custom_components/Form/FormItems";
 import { registerUser } from "../client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
   const router = useRouter();
@@ -25,8 +24,13 @@ const SignUp = () => {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const res = await registerUser(values);
+    toast("User Signed In Successfully!");
     if (res) {
-      router.push("/login");
+
+      setTimeout(() => {
+        router.push("/login");
+      }, 2000)
+
     }
     form.reset(defaultValues);
   }
@@ -76,6 +80,7 @@ const SignUp = () => {
                     label="Password"
                     placeholder="••••••••"
                     field={field}
+                    type="password"
                   />
                 )}
               />
@@ -89,6 +94,7 @@ const SignUp = () => {
                     label="Confirm Password"
                     placeholder="••••••••"
                     field={field}
+                    type="password"
                   />
                 )}
               />
@@ -171,6 +177,7 @@ const SignUp = () => {
           </div>
         </form>
       </Form>
+      <ToastContainer />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 export const getAllUsers = async () => {
   try {
     const url = `${process.env.NEXT_PUBLIC_API_URL}/users`;
-    const res = await fetch(url);
+    const res = await fetch(url,{cache:"no-store"});
     const data = res.json();
     return data;
   } catch (error) {
@@ -12,7 +12,7 @@ export const getAllUsers = async () => {
 export const getUser = async (id: string) => {
   try {
     const url = `${process.env.NEXT_PUBLIC_API_URL}/users/${id}`;
-    const res = await fetch(url);
+    const res = await fetch(url, {cache:"no-store"});
     const data = res.json();
     return data;
   } catch (error) {
