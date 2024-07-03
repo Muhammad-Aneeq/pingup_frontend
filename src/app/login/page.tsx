@@ -24,8 +24,8 @@ const Login = () => {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof loginFormSchema>) {
     const res = await loginUser(values);
-    console.log("res>>>", res);
-    if (res.role !== "admin") {
+    console.log("res>>>", res.user.role);
+    if (res.user.role !== "admin") {
       router.push(`/users/${res.user._id}`);
     } else {
       router.push("/users");
@@ -38,7 +38,7 @@ const Login = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 w-2/4 mx-auto my-5 p-8  bg-blue-400 rounded-xl"
+          className="space-y-8 w-2/4 mx-auto my-5 p-8  bg-gradient-to-r from-indigo-400 to-cyan-400 rounded-xl"
         >
           <div className="sm:block md:flex justify-between items-center gap-4">
             <div className="w-full my-2">

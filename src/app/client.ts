@@ -40,7 +40,7 @@ export const editUser = async (id: string, userData: any) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: userData,
+      body: JSON.stringify(userData),
     });
     const data = res.json();
     return data;

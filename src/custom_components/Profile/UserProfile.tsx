@@ -33,6 +33,8 @@ const UserProfile = ({ data }: any) => {
   async function onSubmit(values: z.infer<typeof editFormSchema>) {
     const res = await editUser(data._id, values);
     form.reset(editDefaultValues);
+    setIsEdit(false)
+    window.location.reload()
     router.refresh();
   }
 
@@ -50,7 +52,7 @@ const UserProfile = ({ data }: any) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 w-9/12 mx-auto my-5 p-8  bg-blue-400 rounded-xl"
+          className="space-y-8 w-9/12 mx-auto my-5 p-8  bg-gradient-to-r from-indigo-400 to-cyan-400 rounded-xl"
         >
           <div className="flex justify-center">
             <Image

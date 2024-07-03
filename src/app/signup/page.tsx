@@ -36,7 +36,7 @@ const SignUp = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 w-9/12 mx-auto my-5 p-8  bg-blue-400 rounded-xl"
+          className="space-y-8 w-9/12 mx-auto my-5 p-8  bg-gradient-to-r from-indigo-400 to-cyan-400 rounded-xl"
         >
           <div className="sm:block md:flex justify-between items-center gap-4">
             <div className="w-full my-2">

@@ -13,7 +13,7 @@ import DeleteComp from "./DeleteComp";
 
 export function UserTable({ data }: any) {
   return (
-    <div className="w-4/5 mx-auto my-12 p-8  bg-blue-400 rounded-xl text-white">
+    <div className="w-4/5 mx-auto my-12 p-8  bg-gradient-to-r from-indigo-400 to-cyan-400 rounded-xl text-white">
       <h1 className="text-center text-3xl font-bold mb-6">User&apos;s List </h1>
       <div className="flex justify-end my-2 text-lg ">
         <Link href="/login">Log Out</Link>
